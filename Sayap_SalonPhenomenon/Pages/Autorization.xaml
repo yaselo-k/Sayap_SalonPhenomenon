@@ -1,0 +1,39 @@
+﻿<Page x:Class="Sayap_SalonPhenomenon.Pages.Autorization"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Sayap_SalonPhenomenon.Pages"
+      mc:Ignorable="d" 
+        d:DesignHeight="400" d:DesignWidth="600"
+  Title="Авторизация">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Style="{StaticResource SPAutorization}">
+            <TextBlock Text="Авторизация" Style="{StaticResource LBAutorization}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Orientation="Vertical" Margin="5,0,5,20">
+            <TextBlock Text="Логин:" Style="{StaticResource LogPass}"/>
+            <TextBox Name="LoginTextBox" Style="{StaticResource TBLogin}"/>
+
+            <TextBlock Text="Пароль:" Style="{StaticResource LogPass}"/>
+            <PasswordBox Name="PasswordBox" Style="{StaticResource PBPass}"/>
+
+            <Button Content="Войти" x:Name="LogIn" Style="{StaticResource LogIN}" Click="LogIn_Click">
+                <Button.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#f2dcdd" Offset="0"/>
+                        <GradientStop Color="#dde0e7" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Page>

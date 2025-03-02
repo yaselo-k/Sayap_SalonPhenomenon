@@ -1,0 +1,49 @@
+﻿<Page x:Class="Sayap_SalonPhenomenon.Pages.EmployeesPages.AddEmployeePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Sayap_SalonPhenomenon.Pages.EmployeesPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AddEmployeePage">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Style="{StaticResource SPLabel}" Grid.ColumnSpan="2" Width="280">
+            <TextBlock Text="Добавить мастера" Foreground="#28313a" FontSize="15"/>
+        </StackPanel>
+        
+        <TextBlock Text="Имя *" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource LBName}"/>
+        <TextBlock Text="Фамилия *" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource LBName}"/>
+        <TextBlock Text="Отчество *" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource LBName}"/>
+        <TextBlock Text="Телефон *" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource LBName}"/>
+        <TextBlock Text="Специализация *" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource LBName}"/>
+
+        <TextBox Grid.Column="1" Grid.Row="2" Style="{StaticResource TBLogin}" Height="50" Text="{Binding MasterName}"/>
+        <TextBox Grid.Column="1" Grid.Row="3" Style="{StaticResource TBLogin}" Height="50" Text="{Binding MasterSurname}"/>
+        <TextBox Grid.Column="1" Grid.Row="4" Style="{StaticResource TBLogin}" Height="50" Text="{Binding MasterPatronymic}"/>
+        <TextBox Grid.Column="1" Grid.Row="1" Style="{StaticResource TBLogin}" Height="50" Text="{Binding MasterPhoneNumber}"/>
+        <TextBox Grid.Column="1" Grid.Row="5" Style="{StaticResource TBLogin}" Height="50" Text="{Binding MasterSpecialization}"/>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="6" Grid.Column="1" HorizontalAlignment="Center">
+            <Button x:Name="Back" Content="Назад" Style="{StaticResource DeleteBT}" 
+Width="100" HorizontalAlignment="Left" Click="Back_Click"/>
+            <Button x:Name="SaveChangesRec" Content="Сохранить" Style="{StaticResource AddChangeBT}" Width="150" Click="SaveChangesRec_Click"/>
+        </StackPanel>
+    </Grid>
+</Page>

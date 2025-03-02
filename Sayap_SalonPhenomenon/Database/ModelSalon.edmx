@@ -1,0 +1,367 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище Salon_PhenomenonModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="IDClient" />
+          </Key>
+          <Property Name="IDClient" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameClient" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SurnameClient" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PatronymicClient" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PhoneNumberClient" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="EmailClient" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Masters">
+          <Key>
+            <PropertyRef Name="IDMaster" />
+          </Key>
+          <Property Name="IDMaster" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MasterName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MasterSurname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MasterPatronymic" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MasterPhoneNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MasterSpecialization" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Registrations">
+          <Key>
+            <PropertyRef Name="IDRegistration" />
+          </Key>
+          <Property Name="IDRegistration" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateRegistration" Type="datetime" Nullable="false" />
+          <Property Name="ClientID" Type="int" Nullable="false" />
+          <Property Name="ServiceID" Type="int" Nullable="false" />
+          <Property Name="MasterID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="IDRole" />
+          </Key>
+          <Property Name="IDRole" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameRole" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Salon">
+          <Key>
+            <PropertyRef Name="IDSalon" />
+          </Key>
+          <Property Name="IDSalon" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CitySalon" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PhoneNumberSalon" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AdressSalon" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Services">
+          <Key>
+            <PropertyRef Name="IDService" />
+          </Key>
+          <Property Name="IDService" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameService" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="CostService" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="IDUser" />
+          </Key>
+          <Property Name="IDUser" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RoleID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Registrations_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Registrations" Type="Self.Registrations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="IDClient" />
+            </Principal>
+            <Dependent Role="Registrations">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Registrations_Master">
+          <End Role="Masters" Type="Self.Masters" Multiplicity="1" />
+          <End Role="Registrations" Type="Self.Registrations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Masters">
+              <PropertyRef Name="IDMaster" />
+            </Principal>
+            <Dependent Role="Registrations">
+              <PropertyRef Name="MasterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Registrations_Services">
+          <End Role="Services" Type="Self.Services" Multiplicity="1" />
+          <End Role="Registrations" Type="Self.Registrations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Services">
+              <PropertyRef Name="IDService" />
+            </Principal>
+            <Dependent Role="Registrations">
+              <PropertyRef Name="ServiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище Salon_PhenomenonModelContainer">
+          <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Masters" EntityType="Self.Masters" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Registrations" EntityType="Self.Registrations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Salon" EntityType="Self.Salon" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Services" EntityType="Self.Services" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Registrations_Clients" Association="Self.FK_Registrations_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Registrations" EntitySet="Registrations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Registrations_Master" Association="Self.FK_Registrations_Master">
+            <End Role="Masters" EntitySet="Masters" />
+            <End Role="Registrations" EntitySet="Registrations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Registrations_Services" Association="Self.FK_Registrations_Services">
+            <End Role="Services" EntitySet="Services" />
+            <End Role="Registrations" EntitySet="Registrations" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Salon_PhenomenonModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="IDClient" />
+          </Key>
+          <Property Name="IDClient" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameClient" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SurnameClient" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PatronymicClient" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PhoneNumberClient" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EmailClient" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Registrations" Relationship="Self.FK_Registrations_Clients" FromRole="Clients" ToRole="Registrations" />
+        </EntityType>
+        <EntityType Name="Masters">
+          <Key>
+            <PropertyRef Name="IDMaster" />
+          </Key>
+          <Property Name="IDMaster" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MasterName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MasterSurname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MasterPatronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MasterPhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MasterSpecialization" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Registrations" Relationship="Self.FK_Registrations_Master" FromRole="Masters" ToRole="Registrations" />
+        </EntityType>
+        <EntityType Name="Registrations">
+          <Key>
+            <PropertyRef Name="IDRegistration" />
+          </Key>
+          <Property Name="IDRegistration" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateRegistration" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ClientID" Type="Int32" Nullable="false" />
+          <Property Name="ServiceID" Type="Int32" Nullable="false" />
+          <Property Name="MasterID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK_Registrations_Clients" FromRole="Registrations" ToRole="Clients" />
+          <NavigationProperty Name="Masters" Relationship="Self.FK_Registrations_Master" FromRole="Registrations" ToRole="Masters" />
+          <NavigationProperty Name="Services" Relationship="Self.FK_Registrations_Services" FromRole="Registrations" ToRole="Services" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="IDRole" />
+          </Key>
+          <Property Name="IDRole" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameRole" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Salon">
+          <Key>
+            <PropertyRef Name="IDSalon" />
+          </Key>
+          <Property Name="IDSalon" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CitySalon" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PhoneNumberSalon" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AdressSalon" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Services">
+          <Key>
+            <PropertyRef Name="IDService" />
+          </Key>
+          <Property Name="IDService" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameService" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CostService" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Registrations" Relationship="Self.FK_Registrations_Services" FromRole="Services" ToRole="Registrations" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="IDUser" />
+          </Key>
+          <Property Name="IDUser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Registrations_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Registrations" Type="Self.Registrations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="IDClient" />
+            </Principal>
+            <Dependent Role="Registrations">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Registrations_Master">
+          <End Role="Masters" Type="Self.Masters" Multiplicity="1" />
+          <End Role="Registrations" Type="Self.Registrations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Masters">
+              <PropertyRef Name="IDMaster" />
+            </Principal>
+            <Dependent Role="Registrations">
+              <PropertyRef Name="MasterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Registrations_Services">
+          <End Role="Services" Type="Self.Services" Multiplicity="1" />
+          <End Role="Registrations" Type="Self.Registrations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Services">
+              <PropertyRef Name="IDService" />
+            </Principal>
+            <Dependent Role="Registrations">
+              <PropertyRef Name="ServiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SalonEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Clients" EntityType="Self.Clients" />
+          <EntitySet Name="Masters" EntityType="Self.Masters" />
+          <EntitySet Name="Registrations" EntityType="Self.Registrations" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" />
+          <EntitySet Name="Salon" EntityType="Self.Salon" />
+          <EntitySet Name="Services" EntityType="Self.Services" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <AssociationSet Name="FK_Registrations_Clients" Association="Self.FK_Registrations_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Registrations" EntitySet="Registrations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Registrations_Master" Association="Self.FK_Registrations_Master">
+            <End Role="Masters" EntitySet="Masters" />
+            <End Role="Registrations" EntitySet="Registrations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Registrations_Services" Association="Self.FK_Registrations_Services">
+            <End Role="Services" EntitySet="Services" />
+            <End Role="Registrations" EntitySet="Registrations" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище Salon_PhenomenonModelContainer" CdmEntityContainer="SalonEntities">
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="Salon_PhenomenonModel.Clients">
+              <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="IDClient" ColumnName="IDClient" />
+                <ScalarProperty Name="NameClient" ColumnName="NameClient" />
+                <ScalarProperty Name="SurnameClient" ColumnName="SurnameClient" />
+                <ScalarProperty Name="PatronymicClient" ColumnName="PatronymicClient" />
+                <ScalarProperty Name="PhoneNumberClient" ColumnName="PhoneNumberClient" />
+                <ScalarProperty Name="EmailClient" ColumnName="EmailClient" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Masters">
+            <EntityTypeMapping TypeName="Salon_PhenomenonModel.Masters">
+              <MappingFragment StoreEntitySet="Masters">
+                <ScalarProperty Name="IDMaster" ColumnName="IDMaster" />
+                <ScalarProperty Name="MasterName" ColumnName="MasterName" />
+                <ScalarProperty Name="MasterSurname" ColumnName="MasterSurname" />
+                <ScalarProperty Name="MasterPatronymic" ColumnName="MasterPatronymic" />
+                <ScalarProperty Name="MasterPhoneNumber" ColumnName="MasterPhoneNumber" />
+                <ScalarProperty Name="MasterSpecialization" ColumnName="MasterSpecialization" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Registrations">
+            <EntityTypeMapping TypeName="Salon_PhenomenonModel.Registrations">
+              <MappingFragment StoreEntitySet="Registrations">
+                <ScalarProperty Name="IDRegistration" ColumnName="IDRegistration" />
+                <ScalarProperty Name="DateRegistration" ColumnName="DateRegistration" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
+                <ScalarProperty Name="MasterID" ColumnName="MasterID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="Salon_PhenomenonModel.Roles">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="IDRole" ColumnName="IDRole" />
+                <ScalarProperty Name="NameRole" ColumnName="NameRole" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Salon">
+            <EntityTypeMapping TypeName="Salon_PhenomenonModel.Salon">
+              <MappingFragment StoreEntitySet="Salon">
+                <ScalarProperty Name="IDSalon" ColumnName="IDSalon" />
+                <ScalarProperty Name="CitySalon" ColumnName="CitySalon" />
+                <ScalarProperty Name="PhoneNumberSalon" ColumnName="PhoneNumberSalon" />
+                <ScalarProperty Name="AdressSalon" ColumnName="AdressSalon" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Services">
+            <EntityTypeMapping TypeName="Salon_PhenomenonModel.Services">
+              <MappingFragment StoreEntitySet="Services">
+                <ScalarProperty Name="IDService" ColumnName="IDService" />
+                <ScalarProperty Name="NameService" ColumnName="NameService" />
+                <ScalarProperty Name="CostService" ColumnName="CostService" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="Salon_PhenomenonModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="IDUser" ColumnName="IDUser" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
